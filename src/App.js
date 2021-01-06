@@ -1,24 +1,29 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
-} from "react-router-dom"
-import Searchbar from "./components/Searchbar"
-import Results from "./components/Results"
-import "./App.css"
+  Redirect,
+} from 'react-router-dom'
+import Searchbar from './components/Searchbar'
+import Results from './components/Results'
+import './App.css'
+import config from './markets'
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
-    <Router>
-      <Switch>
-        <div className="App">
-          <Route path="/results/:term" exact component={() => <Results />} />
+    <div className='App'>
+      <Router>
+        <Switch>
           <Route
-            path="/"
+            path='/results/:term'
+            exact
+            component={() => <Results config={config} />}
+          />
+          <Route
+            path='/'
             exact
             component={() => (
               <>
@@ -26,9 +31,9 @@ function App() {
               </>
             )}
           />
-        </div>
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </div>
   )
 }
 

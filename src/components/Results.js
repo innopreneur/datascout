@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react"
-import { Grid, Header, Image } from "semantic-ui-react"
-import { useParams } from "react-router-dom"
-import ResultCard from "./ResultCard"
-import Loader from "react-loader-spinner"
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import "./Results.css"
+import React, { useEffect, useState } from 'react'
+import { Grid, Header, Image } from 'semantic-ui-react'
+import { useParams } from 'react-router-dom'
+import ResultCard from './ResultCard'
+import Loader from 'react-loader-spinner'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import './Results.css'
 
-let config = "https://aquarius.mainnet.oceanprotocol.com"
+let config = 'https://aquarius.mainnet.oceanprotocol.com'
 
 export default function Collection() {
   const [isLoading, setIsLoading] = useState(true)
   const [results, setResults] = useState([])
-  const { accountId } = useOcean()
   let { term } = useParams()
 
   useEffect(() => {
     async function fetchDataAssets() {
-      console.log("Search term - ", term)
+      console.log('Search term - ', term)
       console.log(term)
       console.log(process.env.REACT_APP_DAPP_ID)
       try {
@@ -25,20 +24,20 @@ export default function Collection() {
         console.log(url)
         let encodedUrl = encodeURI(url)
         const response = await fetch(encodedUrl, {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
         })
         const { results } = await response.json()
         if (response.status == 200) {
           setIsLoading(false)
           let processedData = await processData(results)
-          console.log("processed data -")
+          console.log('processed data -')
           console.log(processedData)
           let finalArr = splitResults(processedData, 4)
-          console.log("final data -")
+          console.log('final data -')
           console.log(finalArr)
           setResults(finalArr.slice())
         }
@@ -61,7 +60,7 @@ export default function Collection() {
   function renderLoader() {
     return (
       <div style={{ paddingTop: 200 }}>
-        <Loader type="Bars" color="skyblue" height={100} width={100} />
+        <Loader type='Bars' color='skyblue' height={100} width={100} />
         <h3>Loading Search Results</h3>
       </div>
     )
@@ -69,7 +68,7 @@ export default function Collection() {
 
   async function processData(datasets) {
     return await Promise.all(
-      datasets.map(item => {
+      datasets.map((item) => {
         var metadata = item.service[0]
         if (metadata) {
           if (metadata.attributes) {
@@ -86,7 +85,7 @@ export default function Collection() {
               tags,
               price: Number(item.price.value).toFixed(2),
               ddo: item,
-              did: item.id
+              did: item.id,
             }
           }
         }
@@ -97,7 +96,7 @@ export default function Collection() {
   function renderRow(item, index) {
     return (
       <Grid.Row centered key={index} columns={4}>
-        {item.map(it => {
+        {item.map((it) => {
           return (
             <Grid.Column>
               <ResultCard
@@ -118,7 +117,7 @@ export default function Collection() {
   return isLoading ? (
     renderLoader()
   ) : results.length ? (
-    <Grid divided="vertically" className="container">
+    <Grid divided='vertically' className='container'>
       {results.map((it, i) => renderRow(it, i))}
     </Grid>
   ) : (

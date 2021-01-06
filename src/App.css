@@ -1,12 +1,4 @@
 .App {
   text-align: center;
-  background-color: azure;
-  min-height: 2000px;
-}
-
-.divider {
-  margin-top: 5%;
-  height: 5%;
-  min-height: 2% !important;
-  background-color: "#000";
+  background-color: brown;
 }
