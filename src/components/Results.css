@@ -1,9 +1,8 @@
-
-  .container {
-    /*background: #4a5156;*/
-    margin-top: 5%; 
-    padding: 2%;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-  }
+.container {
+  background: #fafafa;
+  margin-top: 5%;
+  padding: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

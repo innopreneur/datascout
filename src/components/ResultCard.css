@@ -6,3 +6,11 @@
 .card > .cardContent {
   background-color: azure;
 }
+
+.card {
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: #fafafa;
+}

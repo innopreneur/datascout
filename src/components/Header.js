@@ -1,32 +1,54 @@
 import React, { useState, useEffect } from "react"
 import { Button, Input, Icon } from "semantic-ui-react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
+import Logo from "./Logo"
+import Bubbles from "./Bubbles"
 import "./Header.css"
 import "../global.css"
 
-export default function Header({ config, setSearch }) {
-  const [searchTerm, setSearchTerm] = useState("")
+export default function Header({ term, config }) {
+  const [searchTerm, setSearchTerm] = useState(term)
 
-  useEffect(() => {}, [config])
+  const history = useHistory()
+
+  function searchResults(term) {
+    history.push({
+      pathname: "/results",
+      search: `?search=${encodeURI(term)}`, // query string
+      state: {
+        // location state
+        update: true,
+        searchTerm: term
+      }
+    })
+  }
+
   return (
     <>
       <header className="headerContainer">
+        <Bubbles />
         <Link to="/">
-          <h2 className="brand applogo">Data Scout</h2>
+          <Logo size={30} color="#000" />
         </Link>
+
         <Input
+          size="medium"
+          style={{
+            border: "2px solid black",
+            marginLeft: 30
+          }}
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
           icon={
             <Icon
               name="search"
-              onClick={() => setSearch(searchTerm)}
+              onClick={() => searchResults(searchTerm)}
+              style={{ color: "black" }}
               inverted
               circular
               link
             />
           }
-          placeholder="Search Data..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
         />
       </header>
     </>

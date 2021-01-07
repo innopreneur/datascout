@@ -1,11 +1,16 @@
-import React from 'react'
-import './Logo.css'
+import React from "react"
+import "./Logo.css"
 
-export default function Logo() {
+export default function Logo({ size, color, background }) {
   return (
     <p>
-      <span className='logo1'>DATA</span>
-      <span className='logo2'> SCOUT</span>{' '}
+      <span className="logo1" style={{ fontSize: size, color, background }}>
+        DATA
+      </span>
+      <span className="logo2" style={{ fontSize: size, color }}>
+        {" "}
+        SCOUT
+      </span>{" "}
     </p>
   )
 }

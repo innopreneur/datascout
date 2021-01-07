@@ -1,32 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom'
-import Searchbar from './components/Searchbar'
-import Results from './components/Results'
-import './App.css'
-import config from './markets'
+  useHistory
+} from "react-router-dom"
+import Searchbar from "./components/Searchbar"
+import Results from "./components/Results"
+import Bubbles from "./components/Bubbles"
+import "./App.css"
+import config from "./markets"
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('')
-
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Switch>
           <Route
-            path='/results/:term'
+            path="/results"
             exact
             component={() => <Results config={config} />}
           />
           <Route
-            path='/'
+            path="/"
             exact
             component={() => (
               <>
+                <Bubbles />
                 <Searchbar />
               </>
             )}
